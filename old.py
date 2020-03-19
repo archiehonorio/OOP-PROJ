@@ -5,207 +5,6 @@ from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 
 
-
-class Intro(QMainWindow):
-    def __init__(self):
-        super().__init__()
-        self.title = "Human Body Analysis"
-        self.x=350
-        self.y=100
-        self.width=1000
-        self.height=700
-        self.initUI()
-
-    def initUI(self):
-
-        self.setWindowTitle(self.title)
-        self.setGeometry(self.x,self.y,self.width,self.height)
-        self.setWindowIcon(QIcon('logo1.png'))
-        #BACKGROUND
-        photo = QImage('89918644_227961811660226_7971876158016847872_n.png')
-        photo1 = photo.scaled(QSize(1000,700))
-        palette = QPalette()
-        palette.setBrush(QPalette.Window, QBrush(photo1))
-        self.setPalette(palette)
-        #BUTTON 
-        self.button = QPushButton('Click here to Start...', self)
-        self.button.setStyleSheet("""background-color: transparent grey; border-radius:10px; border-style: outset; border-width: 0.8px;border-radius: 10px; text-color:black;font-weight:bold;""")
-        self.button.setGeometry(450, 480, 300, 50)
-        self.button.clicked.connect(self.open)
-        self.show()
-    def closeEvent(self, event):
-        
-        reply = QMessageBox.question(self, 'Confirmation',
-            "Are you sure to quit?", QMessageBox.Yes | 
-            QMessageBox.No, QMessageBox.No)
-
-        if reply == QMessageBox.Yes:
-            event.accept()
-        else:
-            event.ignore()
-
-    def open(self):
-        Intro.hide(self)
-        self.loading = loading()
-        self.loading.show()
-
-class loading(QMainWindow):
-    def __init__(self):
-        super().__init__()
-        self.title = "Human Body Analysis"
-        self.x=350
-        self.y=100
-        self.width=1000
-        self.height=700     
-        self.initUI()  
-
-    def initUI(self):      
-        self.loading = QProgressBar(self)
-        self.loading.setStyleSheet("""QProgressBar {border: 2px groove lightgray;border-radius: 5px;text-align: center;} QProgressBar::chunk {background-color: lightblue;}""")
-        self.loading.setGeometry(160, 600, 700, 25)
-        self.button = QPushButton('Start', self)
-        self.button.move(460, 650)
-        self.button.setStyleSheet("""background-color: #D3D3D3; border-radius:10px; border-style: outset; border-width: 0.8px;border-radius: 10px; text-color:black;""")
-        self.button.clicked.connect(self.doAction)
-        self.timer = QBasicTimer()
-        self.step = 0
-        self.setGeometry(350, 100, 1000, 700)
-        self.setWindowTitle('Human Body Analysis')
-        self.setWindowIcon(QIcon('logo1.png'))
-
-        image = QImage('90312550_848305342312426_4809600550968492032_n.png')
-        image1 = image.scaled(QSize(1000,700))
-        palette = QPalette()
-        palette.setBrush(QPalette.Window, QBrush(image1))
-        self.setPalette(palette)
-
-        self.show()
-
-    def timerEvent(self, e):      
-        if self.step >= 100:            
-            self.timer.stop()
-            loading.hide(self)
-            self.Main = Main()
-            self.Main.show()
-            return            
-        self.step = self.step + 1
-        self.loading.setValue(self.step)
-
-    def doAction(self):  
-        if self.timer.isActive():
-            self.timer.stop()
-            self.button.setText('Start')
-        else:
-            self.timer.start(20, self)
-            self.button.setText('Stop') 
-class Main(QMainWindow):
-    def __init__(self):
-        super().__init__()
-        self.title = "Human Body Analysis"
-        self.x=350
-        self.y=100
-        self.width=1000
-        self.height=700
-        self.initUI()
-
-    def initUI(self):
-
-        self.setWindowTitle(self.title)
-        self.setGeometry(self.x,self.y,self.width,self.height)
-        self.setWindowIcon(QIcon('logo1.png'))
-        #DITO YUNG BACKGROUND
-        photo = QImage('3.jpg')
-        photo1 = photo.scaled(QSize(1000,700))
-        palette = QPalette()
-        palette.setBrush(QPalette.Window, QBrush(photo1))
-        self.setPalette(palette)
-
-        self.doctor = QLabel(self)
-        self.doctor.setPixmap(QPixmap('doctor.png'))
-        self.doctor.setGeometry(30,200,250,500)
-        self.text = QLabel(self)
-        self.text.setPixmap(QPixmap(''))
-        self.text.setGeometry(230,10,400,400)
-
-        self.name = QLabel("<h4>Name:</h4>",self)
-        self.name.setStyleSheet("color: black; font-weight: bold;")
-        self.name.move(370,250)
-        self.textbox1 = QLineEdit(self)
-        self.textbox1.setGeometry(370,280,250,30)
-        #self.textbox1.setStyleSheet("")
-        self.age = QLabel("<h4>Age:</h4>",self)
-        self.age.setStyleSheet("color: black; font-weight: bold;")
-        self.age.move(370,310)
-        self.textbox2 = QLineEdit(self)
-        self.textbox2.setGeometry(370,340,250,30)
-        #self.textbox2.setStyleSheet("")
-        self.height = QLabel("<h4>Height:</h4>",self)
-        self.height.setStyleSheet("color: black; font-weight: bold;")
-        self.height.move(370,370)
-        self.textbox3 = QLineEdit(self)
-        self.textbox3.setGeometry(370,400,250,30)
-        self.textbox3.setPlaceholderText("kilograms only")
-        #self.textbox3.setStyleSheet("")        
-        self.weight = QLabel("<h4>Weight:</h4>",self)
-        self.weight.setStyleSheet("color: black; font-weight: bold;")
-        self.weight.move(370,430)
-        self.textbox4 = QLineEdit(self)
-        self.textbox4.setPlaceholderText("meters only")
-        self.textbox4.setGeometry(370,460,250,30)
-        self.sex = QLabel("<h4>Sex:</h4>",self)
-        self.sex.setStyleSheet("color: black; font-weight: bold;")
-        self.sex.move(370,490)
-        self.textbox5 = QLineEdit(self)
-        self.textbox5.setGeometry(370,520,250,30)
-        #self.textbox4.setStyleSheet("")
-        self.button =  QPushButton("Start",self)
-        #self.button.setStyleSheet("")
-        self.button.setGeometry(375,580,250,30)
-        self.button.clicked.connect(self.info)
-        self.show()
-    def info(self):
-        name = str(self.textbox1.text())
-        age = int(self.textbox2.text())
-        height = int(self.textbox3.text())
-        weight = int(self.textbox4.text())
-        sex = str(self.textbox5.text())
-        ageGap = 13
-        ageGap1 = 59
-        ageGap2 = 60
-        ageGap3 = 12
-        BMI = weight/((height)**2)
-        BSA = 0.20247*(height**0.725)*(weight**0.425)
-
-        self.compute = compute()
-        self.compute.bmi(BMI)
-        self.compute.bsa(BSA)
-        self.data(name,age,height,weight,sex,ageGap,ageGap1,ageGap2,ageGap3,BMI,BSA)
-    def data(self,name,age,height,weight,sex,ageGap,ageGap1,ageGap2,ageGap3,BMI,BSA):
-        proceed = QMessageBox.question(self, "Submitting Data", "Confirm?", QMessageBox.Yes | QMessageBox.No, QMessageBox.Yes)
-        if proceed == QMessageBox.Yes and name != "" and age != "" and height != "" and weight != "" and sex != "":
-            dictionarydb = SqliteDict("AgeStruc.db", autocommit= True)
-            ageDiff = dictionarydb.get('Age',[])
-            Data = {"name":name,"age":age,"height":height,"weight":weight, "sex":sex,"BMI":BMI,"BSA":BSA}
-            ageDiff.append(Data)
-            dictionarydb['Age'] = ageDiff
-            for ageStruc in dictionarydb['Age']:
-                if ageStruc['age'] >= ageGap and ageStruc['age'] <= ageGap1:
-                    Main.hide(self)
-                    self.adult = adult()
-                    self.adult.show()
-                elif ageStruc['age'] >= ageGap2:
-                    print("hehe")
-                elif ageStruc['age'] <= ageGap3:
-                    print("asdada")
-            print(dictionarydb['Age'])
-        elif proceed == QMessageBox.No:
-            pass
-        elif proceed == QMessageBox.No and name != "" and age != "" and height != "" and weight != "" and sex != "":
-            pass
-        elif proceed == QMessageBox.No and name != "" or age != "" or height != "" or weight != "" or sex != "":
-            QMessageBox.warning(self, "Error","Please complete the blanked field", QMessageBox.Ok, QMessageBox.Ok)
-
-
 class adult(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -230,7 +29,28 @@ class adult(QMainWindow):
         self.doctor = QLabel(self)
         self.doctor.setPixmap(QPixmap('adult.png'))
         self.doctor.setGeometry(300,150,400,500)
+        """
+        self.text = QLineEdit(self)
+        self.text.setGeometry(195,150,60,30)
+        self.text.setAlignment(Qt.AlignCenter)
+        self.textL = QLabel("Age",self)
+        self.textL.setStyleSheet("color: white; font-weight: bold;")
+        self.textL.move(210,120)
 
+        self.text1 = QLineEdit(self)
+        self.text1.setGeometry(300,450,60,30)
+        self.text1.setAlignment(Qt.AlignCenter)
+        self.textL1 = QLabel("Height",self)
+        self.textL1.setStyleSheet("color: white; font-weight: bold;")
+        self.textL1.move(310,420)
+
+        self.text2 = QLineEdit(self)
+        self.text2.setGeometry(195,680,60,30)
+        self.text2.setAlignment(Qt.AlignCenter)
+        self.textL2 = QLabel("Weight",self)
+        self.textL2.setStyleSheet("color: white; font-weight: bold;")
+        self.textL2.move(205,650)
+        """
         self.button =  QPushButton("Organ Systems",self)
         self.button.setStyleSheet("""QPushButton{border: 3px groove white; border-radius: 30px; text-align: center; font-size: 30px; background-color: #0457bf; color:white;} QPushButton:hover {border: 2px groove white; border-radius: 20px; text-align: center; font-size: 35px; background-color: #000080; color:white; transform: }""")
         self.button.setGeometry(325,100,350,70)
@@ -264,6 +84,7 @@ class adult(QMainWindow):
     def compute(self):
         self.compute = compute()
         self.compute.show
+    
 class OrganSystems(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -329,6 +150,7 @@ class OrganSystems(QMainWindow):
         self.photo = QLabel(self)
         self.photo.setPixmap(QPixmap('db8d2db9c5ebcf7e4748d1370b11a146.jpg'))
         self.photo.setGeometry(350,70,620,600)
+    
     def show_skeletal(self):
         self.photo.setPixmap(QPixmap("cat.jpg"))
     def show_endocrine(self):
@@ -351,7 +173,9 @@ class OrganSystems(QMainWindow):
         self.photo.setPixmap(QPixmap("dog.jpg"))
     def show_lymphatic(self):
         self.photo.setPixmap(QPixmap("cat.jpg"))
+
         self.show()
+
 class workout(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -403,24 +227,28 @@ class health(QMainWindow):
 class compute(QMainWindow):
     def __init__(self):
         super().__init__()
-        main = Main()
-        self.setWindowTitle("Computation")
+        self.setWindowTitle("Appliances information")
         self.setWindowIcon(QIcon('ICON.png'))
         self.setGeometry(350,100,1000,750)
+
         image = QImage('background6.jpg')
         image1 = image.scaled(QSize(580,500))
         palette = QPalette()
         palette.setBrush(QPalette.Window, QBrush(image1))
         self.setPalette(palette)
-
-        self.bmi = QLineEdit(self)
-        self.bmi.setText("")
-
-        self.bsa = QLineEdit(self)
-        self.bsa.setText("")
-        self.bsa.move(50,50)
-
+        
+        formLayout =QFormLayout()
+        groupBox = QGroupBox()
+        scroll = QScrollArea()
+        scroll.setWidget(groupBox)
+        scroll.setWidgetResizable(True)
+        scroll.setFixedHeight(400)
+        layout = QVBoxLayout(self)
+        layout.addWidget(scroll)
+        groupBox.setLayout(formLayout)
+        self.setLayout(layout)
         self.show()
+    def data(self):
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     main = adult()
