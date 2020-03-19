@@ -334,6 +334,7 @@ class adult(QMainWindow):
         self.textL2 = QLabel("Weight",self)
         self.textL2.setStyleSheet("color: white; font-weight: bold;")
         self.textL2.move(205,650)
+        self.button4 = QPushButton('Workout Ideas', self)
         self.button4.setStyleSheet("border: 2px groove white; border-radius: 5px; text-align: center; background-color: white;")
         self.button4.setGeometry(600,380,250,30)
         self.button4.clicked.connect(self.workout)
@@ -362,14 +363,15 @@ class matanda(QMainWindow):
         self.setGeometry(self.x,self.y,self.width,self.height)
         self.setWindowIcon(QIcon('logo1.png'))
         #DITO YUNG BACKGROUND
-        photo = QImage('background1.jpg')
+        photo = QImage('3d-empty-studio-room-show-booth-for-designers-with-spotlight-on-black-gradient-background-vector.jpg')
         photo1 = photo.scaled(QSize(1000,750))
         palette = QPalette()
         palette.setBrush(QPalette.Window, QBrush(photo1))
         self.setPalette(palette)
         self.doctor = QLabel(self)
-        self.doctor.setPixmap(QPixmap('matanda2.jpg'))
-        self.doctor.setGeometry(30,200,400,500)
+        self.doctor.setPixmap(QPixmap('matanda.jpg'))
+        self.doctor.setGeometry(300,150,400,500)
+        """
         self.text = QLineEdit(self)
         self.text.setGeometry(195,150,60,30)
         self.text.setAlignment(Qt.AlignCenter)
@@ -390,23 +392,301 @@ class matanda(QMainWindow):
         self.textL2 = QLabel("Weight",self)
         self.textL2.setStyleSheet("color: white; font-weight: bold;")
         self.textL2.move(205,650)
-
-
-        self.computation = QPushButton('Computation', self)
-        self.computation.setStyleSheet("""background-color: #FFDF00; border-radius:5px; border-style: outset; border-width: 0.8px;border-radius: 5px; text-color:black;""")
-        self.computation.clicked.connect(self.com_choice) #connected sa def com_choice whichc leads to class window computations
-        
+        """
+        self.button =  QPushButton("Organ Systems",self)
+        self.button.setStyleSheet("""QPushButton{border: 3px groove white; border-radius: 30px; text-align: center; font-size: 30px; background-color: #0457bf; color:white;} QPushButton:hover {border: 2px groove white; border-radius: 20px; text-align: center; font-size: 35px; background-color: #000080; color:white; transform: }""")
+        self.button.setGeometry(325,100,350,70)
+        self.button.clicked.connect(self.organs)
+        self.button2 =  QPushButton("Compute BMI:",self)
+        self.button2.setStyleSheet("""QPushButton{border: 2px groove white; border-radius: 10px; text-align: center; font-size: 12px; background-color: #0457bf; color:white;} QPushButton:hover {border: 2px groove white; border-radius: 10px; text-align: center; font-size: 14px; background-color: #000080; color:white; transform: }""")
+        self.button2.setGeometry(375,650,250,40)
+        self.button2.clicked.connect(self.com_choice)
+        self.button3 =  QPushButton("Health Care Tips",self)
+        self.button3.setStyleSheet("""QPushButton{border: 2px groove white; border-radius: 10px; text-align: center; font-size: 12px; background-color: #0457bf; color:white;} QPushButton:hover {border: 2px groove white; border-radius: 10px; text-align: center; font-size: 14px; background-color: #000080; color:white; transform: }""")
+        self.button3.setGeometry(150,380,250,40)
+        self.button3.clicked.connect(self.H_tips)
         self.button4 =  QPushButton("Workout Ideas",self)
         self.button4.setStyleSheet("border: 2px groove white; border-radius: 5px; text-align: center; background-color: white;")
         self.button4.setGeometry(600,380,250,30)
         self.button4.clicked.connect(self.workout)
-
-        def workout(self):
-            self.hide(self)
-            self.open = Workout_console()
-            self.open.show()
         
         self.show()
+        
+    def workout(self):
+        matanda.hide(self)
+        self.open = Workout_console()
+        self.open.show()
+    def com_choice(self):
+        matanda.hide(self)
+        self.open = Computes()
+        self.open.show()
+    def organs(self):
+        matanda.hide(self)
+        self.organ = Organics()
+        self.organ.show()
+    def H_tips(self):
+        self.matanda.hide(self)
+        self.open = H_tipping()
+        self.open.show()
+
+class Organics(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.title = "Human Body Analysis - Organ Systems"
+        self.x=350
+        self.y=100
+        self.width=1000
+        self.height=750
+        self.initUI()
+    def initUI(self):
+        self.setWindowTitle(self.title)
+        self.setGeometry(self.x,self.y,self.width,self.height)
+        self.setWindowIcon(QIcon('logo1.png'))
+        photos = QImage('matanda2.jpg')
+        photo1 = photos.scaled(QSize(1000,750))
+        palette = QPalette()
+        palette.setBrush(QPalette.Window, QBrush(photo1))
+        self.setPalette(palette)
+        self.button =  QPushButton("Skeletal System",self)
+        self.button.setStyleSheet("""QPushButton{border: 2px groove white; border-radius: 10px; text-align: center; font-size: 12px; background-color: #4b90c1; color:white;} QPushButton:hover {border: 2px groove white; border-radius: 10px; text-align: center; font-size: 14px; background-color: #0457bf; color:white;  }""")
+        self.button.setGeometry(50,50,250,40)
+        self.button.clicked.connect(self.show_skeletal)
+        self.button2 =  QPushButton("Endocrine System",self)
+        self.button2.setStyleSheet("""QPushButton{border: 2px groove white; border-radius: 10px; text-align: center; font-size: 12px; background-color: #0457bf; color:white;} QPushButton:hover {border: 2px groove white; border-radius: 10px; text-align: center; font-size: 14px; background-color: #000080; color:white;  }""")
+        self.button2.setGeometry(50,110,250,40)
+        self.button2.clicked.connect(self.show_endocrine)
+        self.button3 =  QPushButton("Nervous System",self)
+        self.button3.setStyleSheet("""QPushButton{border: 2px groove white; border-radius: 10px; text-align: center; font-size: 12px; background-color: #4b90c1; color:white;} QPushButton:hover {border: 2px groove white; border-radius: 10px; text-align: center; font-size: 14px; background-color: #000080; color:white;  }""")
+        self.button3.setGeometry(50,170,250,40)
+        self.button3.clicked.connect(self.show_nervous)
+        self.button4 =  QPushButton("Circulatory System",self)
+        self.button4.setStyleSheet("""QPushButton{border: 2px groove white; border-radius: 10px; text-align: center; font-size: 12px; background-color: #0457bf; color:white;} QPushButton:hover {border: 2px groove white; border-radius: 10px; text-align: center; font-size: 14px; background-color: #000080; color:white;  }""")
+        self.button4.setGeometry(50,230,250,40)
+        self.button4.clicked.connect(self.show_circulatory)
+        self.button5 =  QPushButton("Integumentary System",self)
+        self.button5.setStyleSheet("""QPushButton{border: 2px groove white; border-radius: 10px; text-align: center; font-size: 12px; background-color: #4b90c1; color:white;} QPushButton:hover {border: 2px groove white; border-radius: 10px; text-align: center; font-size: 14px; background-color: #000080; color:white;  }""")
+        self.button5.setGeometry(50,290,250,40)
+        self.button5.clicked.connect(self.show_integumentary)
+        self.button6 =  QPushButton("Reproductive System",self)
+        self.button6.setStyleSheet("""QPushButton{border: 2px groove white; border-radius: 10px; text-align: center; font-size: 12px; background-color: #0457bf; color:white;} QPushButton:hover {border: 2px groove white; border-radius: 10px; text-align: center; font-size: 14px; background-color: #000080; color:white;  }""")
+        self.button6.setGeometry(50,350,250,40)
+        self.button6.clicked.connect(self.show_reproductive)
+        self.button7 =  QPushButton("Muscular System",self)
+        self.button7.setStyleSheet("""QPushButton{border: 2px groove white; border-radius: 10px; text-align: center; font-size: 12px; background-color: #4b90c1; color:white;} QPushButton:hover {border: 2px groove white; border-radius: 10px; text-align: center; font-size: 14px; background-color: #000080; color:white;  }""")
+        self.button7.setGeometry(50,410,250,40)
+        self.button7.clicked.connect(self.show_muscular)
+        self.button8 =  QPushButton("Digestive System",self)
+        self.button8.setStyleSheet("""QPushButton{border: 2px groove white; border-radius: 10px; text-align: center; font-size: 12px; background-color: #0457bf; color:white;} QPushButton:hover {border: 2px groove white; border-radius: 10px; text-align: center; font-size: 14px; background-color: #000080; color:white; transform: }""")
+        self.button8.setGeometry(50,470,250,40)
+        self.button8.clicked.connect(self.show_digestive)
+        self.button9 =  QPushButton("Respiratory System",self)
+        self.button9.setStyleSheet("""QPushButton{border: 2px groove white; border-radius: 10px; text-align: center; font-size: 12px; background-color: #4b90c1; color:white;} QPushButton:hover {border: 2px groove white; border-radius: 10px; text-align: center; font-size: 14px; background-color: #000080; color:white; transform: }""")
+        self.button9.setGeometry(50,530,250,40)
+        self.button9.clicked.connect(self.show_respiratory)
+        self.button10 =  QPushButton("Urinary System",self)
+        self.button10.setStyleSheet("""QPushButton{border: 2px groove white; border-radius: 10px; text-align: center; font-size: 12px; background-color: #0457bf; color:white;} QPushButton:hover {border: 2px groove white; border-radius: 10px; text-align: center; font-size: 14px; background-color: #000080; color:white; transform: }""")
+        self.button10.setGeometry(50,590,250,40)
+        self.button10.clicked.connect(self.show_urinary)
+        self.button11 =  QPushButton("Lymphatic(Immune) System",self)
+        self.button11.setStyleSheet("""QPushButton{border: 2px groove white; border-radius: 10px; text-align: center; font-size: 12px; background-color: #4b90c1; color:white;} QPushButton:hover {border: 2px groove white; border-radius: 10px; text-align: center; font-size: 14px; background-color: #000080; color:white; transform: }""")
+        self.button11.setGeometry(50,650,250,40)
+        self.button11.clicked.connect(self.show_lymphatic)
+        self.photo = QLabel(self)
+        self.photo.setPixmap(QPixmap('db8d2db9c5ebcf7e4748d1370b11a146.jpg'))
+        self.photo.setGeometry(350,70,620,600)
+
+    def show_skeletal(self):
+        self.photo.setPixmap(QPixmap("matanda buto.jpg"))
+    def show_endocrine(self):
+        self.photo.setPixmap(QPixmap("endog.jpg"))
+    def show_nervous(self):
+        self.photo.setPixmap(QPixmap("nervold.jpg"))
+    def show_circulatory(self):
+        self.photo.setPixmap(QPixmap("oldg.png"))
+    def show_muscular(self):
+        self.photo.setPixmap(QPixmap("oldpep.png"))
+    def show_integumentary(self):
+        self.photo.setPixmap(QPixmap("tandaskin.png"))
+    def show_reproductive(self):
+        self.photo.setPixmap(QPixmap("repold.png"))
+    def show_digestive(self):
+        self.photo.setPixmap(QPixmap("dold.png"))
+    def show_respiratory(self):
+        self.photo.setPixmap(QPixmap("respold.png"))
+    def show_urinary(self):
+        self.photo.setPixmap(QPixmap("urold.png"))
+    def show_lymphatic(self):
+        self.photo.setPixmap(QPixmap("lympold.png"))
+
+class H_tipping(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.title =  "Health Tips for Seniors"
+        self.x = 350
+        self.y = 100
+        self.width = 1000
+        self.height = 750
+        self.initUI()
+    
+    def initUI(self):
+        self.setWindowTitle(self.title)
+        self.setGeometry(self.x, self.y, self.width, self.height)
+        self.setWindowIcon(QIcon('logo1.png'))
+        photos = QImage('health.jpg')
+        photo1 = photos.scaled(QSize(1000,750))
+        palette = QPalette()
+        palette.setBrush(QPalette.Window, QBrush(photo1))
+        self.setPalette(palette)
+        self.pushButton = QPushButton('5 Best Health Foods for Seniors')
+        self.pushButton.setStyleSheet("""QPushButton{border: 2px groove white; border-radius: 10px; text-align: center; font-size: 12px; background-color: #4b90c1; color:white;} QPushButton:hover {border: 2px groove white; border-radius: 10px; text-align: center; font-size: 14px; background-color: #0457bf; color:white;  }""")
+        self.pushButton.setGeometry(50,50,250,40)
+        self.pushButton.clicked.connect(self.gtips)
+
+        self.pushButton2 = QPushButton('5 Dangerous Foods for Seniors')
+        self.pushButton.setStyleSheet("""QPushButton{border: 2px groove white; border-radius: 10px; text-align: center; font-size: 12px; background-color: #4b90c1; color:white;} QPushButton:hover {border: 2px groove white; border-radius: 10px; text-align: center; font-size: 14px; background-color: #0457bf; color:white;  }""")
+        self.pushButton.setGeometry(50,50,250,40)
+        self.pushButton.clicked.connect(self.dtips)
+        self.photo = QLabel(self)
+        self.photo.setPixmap(QPixmap('db8d2db9c5ebcf7e4748d1370b11a146.jpg'))
+        self.photo.setGeometry(350,70,620,600)
+
+    def gtips(self):
+        H_tipping.hide(self)
+        self.open = GoodF()
+        self.open.show()
+
+    def dtips(self):
+        H_tipping.hide(self)
+        self.open = BadF()
+        self.open.show()
+
+class GoodF(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.initUI()
+        self.title =  "Good Food for Seniors"
+        self.x = 350
+        self.y = 100
+        self.width = 1000
+        self.height = 750
+
+    def initUI(): 
+        self.setWindowTitle(self.title)
+        self.setGeometry(self.x, self.y, self.width, self.height)
+        self.setWindowIcon(QIcon('logo1.png'))
+        photos = QImage('health.jpg')
+        photo1 = photos.scaled(QSize(1000,750))
+        palette = QPalette()
+        palette.setBrush(QPalette.Window, QBrush(photo1))
+        self.setPalette(palette)
+        self.label = QLabel('<h4> Good Food for Seniors <h4>', self)
+        self.label.setFont(QFont('Times',20, QFont.Bold))
+        self.label.setStyleSheet('QLabel {color:#dedede;}')
+        self.label.move(480, 50)
+
+        self.labe2 = QLabel("<h4> Apples <h4>", self)
+        self.labe2.setFont(QFont('Times', 20, QFont.Bold))
+        self.labe2.setStyleSheet('QLabel {color:#dedede;}')
+        self.labe2.move(480, 100)
+        self.labe2.resize(120, 30)
+
+        self.labe3 = QLabel("<h4> Shellfish <h4>", self)
+        self.labe3.setFont(QFont('Times', 20, QFont.Bold))
+        self.labe3.setStyleSheet('QLabel {color:#dedede;}')
+        self.labe3.move(480, 250)
+        self.labe3.resize(120, 30)
+
+        self.labe4 = QLabel("<h4> Leafy green vegetables <h4>", self)
+        self.labe4.setFont(QFont('Times', 20, QFont.Bold))
+        self.labe4.setStyleSheet('QLabel {color:#dedede;}')
+        self.labe4.move(480, 450)
+        self.labe4.resize(120, 30)
+
+        self.labe5 = QLabel("<h4> Berries and dark-skinned fruits <h4>", self)
+        self.labe5.setFont(QFont('Times', 20, QFont.Bold))
+        self.labe5.setStyleSheet('QLabel {color:#dedede;}')
+        self.labe5.move(480, 650)
+        self.labe5.resize(120, 30)
+
+        self.labe6 = QLabel("<h4> Asparagus <h4>", self)
+        self.labe6.setFont(QFont('Times', 20, QFont.Bold))
+        self.labe6.setStyleSheet('QLabel {color:#dedede;}')
+        self.labe6.move(480, 700)
+        self.labe6.resize(120, 30)
+
+        self.btn = QPushButton('Back', self)
+        self.btn.setStyleSheet("""QPushButton{border: 3px groove white; border-radius: 30px; text-align: center; font-size: 30px; background-color: #0457bf; color:white;} QPushButton:hover {border: 2px groove white; border-radius: 20px; text-align: center; font-size: 35px; background-color: #000080; color:white; transform: }""")
+        self.btn.move(50,780)
+        self.btn.resize(120, 80)
+        self.btn.clicked.connect(self.balikan)
+    def balikan(self):
+        GoodF.hide(self)
+        self.open = H_tipping()
+        self.open.show()
+
+class BadF(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.initUI()
+        self.title =  "Dangerous Food for Seniors"
+        self.x = 350
+        self.y = 100
+        self.width = 1000
+        self.height = 750
+
+    def initUI(): 
+        self.setWindowTitle(self.title)
+        self.setGeometry(self.x, self.y, self.width, self.height)
+        self.setWindowIcon(QIcon('logo1.png'))
+        photos = QImage('dangold.png')
+        photo1 = photos.scaled(QSize(1000,750))
+        palette = QPalette()
+        palette.setBrush(QPalette.Window, QBrush(photo1))
+        self.setPalette(palette)
+        self.label = QLabel('<h4> Dangerous Food for Seniors <h4>', self)
+        self.label.setFont(QFont('Times',20, QFont.Bold))
+        self.label.setStyleSheet('QLabel {color:#dedede;}')
+        self.label.move(480, 50)
+
+        self.labe2 = QLabel("<h4> Raw or undercooked eggs, meat and poultry <h4>", self)
+        self.labe2.setFont(QFont('Times', 20, QFont.Bold))
+        self.labe2.setStyleSheet('QLabel {color:#dedede;}')
+        self.labe2.move(480, 100)
+        self.labe2.resize(120, 30)
+
+        self.labe3 = QLabel("<h4> Grapefruit <h4>", self)
+        self.labe3.setFont(QFont('Times', 20, QFont.Bold))
+        self.labe3.setStyleSheet('QLabel {color:#dedede;}')
+        self.labe3.move(480, 250)
+        self.labe3.resize(120, 30)
+
+        self.labe4 = QLabel("<h4> High-sodium foods <h4>", self)
+        self.labe4.setFont(QFont('Times', 20, QFont.Bold))
+        self.labe4.setStyleSheet('QLabel {color:#dedede;}')
+        self.labe4.move(480, 450)
+        self.labe4.resize(120, 30)
+
+        self.labe5 = QLabel("<h4> Sodas and sugary drinks <h4>", self)
+        self.labe5.setFont(QFont('Times', 20, QFont.Bold))
+        self.labe5.setStyleSheet('QLabel {color:#dedede;}')
+        self.labe5.move(480, 650)
+        self.labe5.resize(120, 30)
+
+        self.labe6 = QLabel("<h4> Alcoholic beverages <h4>", self)
+        self.labe6.setFont(QFont('Times', 20, QFont.Bold))
+        self.labe6.setStyleSheet('QLabel {color:#dedede;}')
+        self.labe6.move(480, 700)
+        self.labe6.resize(120, 30)
+
+        self.btn = QPushButton('Back', self)
+        self.btn.setStyleSheet("""QPushButton{border: 3px groove white; border-radius: 30px; text-align: center; font-size: 30px; background-color: #0457bf; color:white;} QPushButton:hover {border: 2px groove white; border-radius: 20px; text-align: center; font-size: 35px; background-color: #000080; color:white; transform: }""")
+        self.btn.move(50,780)
+        self.btn.resize(120, 80)
+        self.btn.clicked.connect(self.balik)
+    def balik(self):
+        BadF.hide(self)
+        self.open = H_tipping()
+        self.open.show()
 
 class Workout_console(QMainWindow):
     def __init__(self):
@@ -419,7 +699,7 @@ class Workout_console(QMainWindow):
         self.setWindowIcon(QIcon('logo2.png'))
 
         image = QImage('background1.jpg')
-        image1 = image.scaled(QSize(100,800))
+        image1 = image.scaled(QSize(1000,800))
         palette = QPalette()
         palette.setBrush(QPalette.Window, QBrush(image1))
         self.setPalette(palette)
@@ -478,7 +758,7 @@ class Workout_console(QMainWindow):
         self.MenButton3.setStyleSheet("background-color: #FFDF00; border-radius:40px; border-style: outset ; border-width: 0.8px;border-radius: 40px;")
         self.MenButton3.move(650,450)
         self.MenButton3.resize(120,120)
-        self.MenButton3.clicked.connect(self.ManWork)3
+        self.MenButton3.clicked.connect(self.ManWork3)
 
         self.WomenButton3 = QPushButton('Teen Women',self)
         self.WomenButton3.setStyleSheet("""text-decoration: underline;color: white;font-family: Arial; font-weight: bold""")
@@ -531,7 +811,7 @@ class sman(QMainWindow):
         self.setWindowIcon(QIcon('man.png'))
 
         image = QImage('bg0.jpg')
-        image1 = image.scaled(QSize(500,100))
+        image1 = image.scaled(QSize(1000,800))
         palette = QPalette()
         palette.setBrush(QPalette.Window, QBrush(image1))
         self.setPalette(palette)
@@ -598,7 +878,7 @@ class swman(QMainWindow):
         self.setWindowIcon(QIcon('woman.png'))
 
         image = QImage('bg0.jpg')
-        image1 = image.scaled(QSize(500,100))
+        image1 = image.scaled(QSize(1000,800))
         palette = QPalette()
         palette.setBrush(QPalette.Window, QBrush(image1))
         self.setPalette(palette)
@@ -665,7 +945,7 @@ class aman(QMainWindow):
         self.setWindowIcon(QIcon('woman.png'))
 
         image = QImage('bg0.jpg')
-        image1 = image.scaled(QSize(500,100))
+        image1 = image.scaled(QSize(1000,800))
         palette = QPalette()
         palette.setBrush(QPalette.Window, QBrush(image1))
         self.setPalette(palette)
@@ -732,7 +1012,7 @@ class awman(QMainWindow):
         self.setWindowIcon(QIcon('woman.png'))
 
         image = QImage('bg0.jpg')
-        image1 = image.scaled(QSize(500,100))
+        image1 = image.scaled(QSize(1000,800))
         palette = QPalette()
         palette.setBrush(QPalette.Window, QBrush(image1))
         self.setPalette(palette)
@@ -799,7 +1079,7 @@ class tman(QMainWindow):
         self.setWindowIcon(QIcon('woman.png'))
 
         image = QImage('bg0.jpg')
-        image1 = image.scaled(QSize(500,100))
+        image1 = image.scaled(QSize(1000,800))
         palette = QPalette()
         palette.setBrush(QPalette.Window, QBrush(image1))
         self.setPalette(palette)
@@ -810,7 +1090,7 @@ class tman(QMainWindow):
         self.labeling.move(380, 20)
         self.labeling.resize(120, 30)
 
-        self.workout1 = QLabel("<h4> 1. Bench press , self)
+        self.workout1 = QLabel("<h4> 1. Bench press", self)
         self.workout1.setFont(QFont('Times', 20, QFont.Bold))
         self.workout1.setStyleSheet('QLabel {color:#dedede}')
         self.workout1.move(380, 60)
@@ -866,7 +1146,7 @@ class twman(QMainWindow):
         self.setWindowIcon(QIcon('woman.png'))
 
         image = QImage('bg0.jpg')
-        image1 = image.scaled(QSize(500,100))
+        image1 = image.scaled(QSize(1000,800))
         palette = QPalette()
         palette.setBrush(QPalette.Window, QBrush(image1))
         self.setPalette(palette)
