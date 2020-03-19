@@ -3,7 +3,7 @@ import sys
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
-
+from old import *
 
 
 class Intro(QMainWindow):
@@ -144,13 +144,13 @@ class Main(QMainWindow):
         self.height.move(370,370)
         self.textbox3 = QLineEdit(self)
         self.textbox3.setGeometry(370,400,250,30)
-        self.textbox3.setPlaceholderText("kilograms only")
+        self.textbox3.setPlaceholderText("meters only")
         #self.textbox3.setStyleSheet("")        
         self.weight = QLabel("<h4>Weight:</h4>",self)
         self.weight.setStyleSheet("color: black; font-weight: bold;")
         self.weight.move(370,430)
         self.textbox4 = QLineEdit(self)
-        self.textbox4.setPlaceholderText("meters only")
+        self.textbox4.setPlaceholderText("kilograms only")
         self.textbox4.setGeometry(370,460,250,30)
         self.sex = QLabel("<h4>Sex:</h4>",self)
         self.sex.setStyleSheet("color: black; font-weight: bold;")
@@ -175,17 +175,17 @@ class Main(QMainWindow):
         ageGap3 = 12
         BMI = weight/((height)**2)
         BSA = 0.20247*(height**0.725)*(weight**0.425)
-
-        self.compute = compute()
+        self.compute =compute1()
         self.compute.bmi(BMI)
         self.compute.bsa(BSA)
         self.data(name,age,height,weight,sex,ageGap,ageGap1,ageGap2,ageGap3,BMI,BSA)
     def data(self,name,age,height,weight,sex,ageGap,ageGap1,ageGap2,ageGap3,BMI,BSA):
         proceed = QMessageBox.question(self, "Submitting Data", "Confirm?", QMessageBox.Yes | QMessageBox.No, QMessageBox.Yes)
+
         if proceed == QMessageBox.Yes and name != "" and age != "" and height != "" and weight != "" and sex != "":
             dictionarydb = SqliteDict("AgeStruc.db", autocommit= True)
             ageDiff = dictionarydb.get('Age',[])
-            Data = {"name":name,"age":age,"height":height,"weight":weight, "sex":sex,"BMI":BMI,"BSA":BSA}
+            Data = {"name":name,"age":age,"height":height,"weight":weight, "sex":sex}
             ageDiff.append(Data)
             dictionarydb['Age'] = ageDiff
             for ageStruc in dictionarydb['Age']:
@@ -194,9 +194,9 @@ class Main(QMainWindow):
                     self.adult = adult()
                     self.adult.show()
                 elif ageStruc['age'] >= ageGap2:
-                    print("hehe")
+                    pass
                 elif ageStruc['age'] <= ageGap3:
-                    print("asdada")
+                    pass
             print(dictionarydb['Age'])
         elif proceed == QMessageBox.No:
             pass
@@ -204,7 +204,35 @@ class Main(QMainWindow):
             pass
         elif proceed == QMessageBox.No and name != "" or age != "" or height != "" or weight != "" or sex != "":
             QMessageBox.warning(self, "Error","Please complete the blanked field", QMessageBox.Ok, QMessageBox.Ok)
+class compute1(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("Computation")
+        self.setWindowIcon(QIcon('ICON.png'))
+        self.setGeometry(300,150,1000,750)
+        photo = QImage('com.jpg')
+        photo1 = photo.scaled(QSize(1000,750))
+        palette = QPalette()
+        palette.setBrush(QPalette.Window, QBrush(photo1))
+        self.setPalette(palette)
+    def bmi(self,BMI):
+        self.background = QLabel(self)
+        self.background.setPixmap(QPixmap('bmi.png'))
+        self.background.setGeometry(570,200,200,200)
+        self.bmi = QLineEdit(self)
+        self.bmi.setText(f"{BMI}")
+        self.bmi.setGeometry(620,320,100,20)
+        self.bmi.setAlignment(Qt.AlignCenter)
 
+    def bsa(self,BSA):
+        self.background = QLabel(self)
+        self.background.setPixmap(QPixmap('bsa.png'))
+        self.background.setGeometry(570,300,200,200)
+        self.bsa = QLineEdit(self)
+        self.bsa.setText(f"{BSA}")
+        self.bsa.setGeometry(620,420,100,20)
+        self.bsa.setAlignment(Qt.AlignCenter)
+        self.show()   
 
 class adult(QMainWindow):
     def __init__(self):
@@ -217,7 +245,6 @@ class adult(QMainWindow):
         self.initUI()
 
     def initUI(self):
-
         self.setWindowTitle(self.title)
         self.setGeometry(self.x,self.y,self.width,self.height)
         self.setWindowIcon(QIcon('logo1.png'))
@@ -238,7 +265,7 @@ class adult(QMainWindow):
         self.button2 =  QPushButton("Compute BMI:",self)
         self.button2.setStyleSheet("""QPushButton{border: 2px groove white; border-radius: 10px; text-align: center; font-size: 12px; background-color: #0457bf; color:white;} QPushButton:hover {border: 2px groove white; border-radius: 10px; text-align: center; font-size: 14px; background-color: #000080; color:white; transform: }""")
         self.button2.setGeometry(375,650,250,40)
-        self.button2.clicked.connect(self.compute)
+        self.button2.clicked.connect(self.compute1)
         #$self.button2.clicked.connect()
         self.button3 =  QPushButton("Health Care Tips",self)
         self.button3.setStyleSheet("""QPushButton{border: 2px groove white; border-radius: 10px; text-align: center; font-size: 12px; background-color: #0457bf; color:white;} QPushButton:hover {border: 2px groove white; border-radius: 10px; text-align: center; font-size: 14px; background-color: #000080; color:white; transform: }""")
@@ -257,13 +284,13 @@ class adult(QMainWindow):
     def organs(self):
         self.organ = OrganSystems()
         self.organ.show()
-        self.computation = QPushButton
+
     def health(self):
         self.health = health()
         self.health.show()
-    def compute(self):
-        self.compute = compute()
-        self.compute.show
+    def compute1(self):
+        self.compute1 = compute1()
+        self.compute1.show()
 class OrganSystems(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -400,28 +427,8 @@ class health(QMainWindow):
         groupBox.setLayout(formLayout)
         self.setLayout(layout)
         self.show()
-class compute(QMainWindow):
-    def __init__(self):
-        super().__init__()
-        main = Main()
-        self.setWindowTitle("Computation")
-        self.setWindowIcon(QIcon('ICON.png'))
-        self.setGeometry(350,100,1000,750)
-        image = QImage('background6.jpg')
-        image1 = image.scaled(QSize(580,500))
-        palette = QPalette()
-        palette.setBrush(QPalette.Window, QBrush(image1))
-        self.setPalette(palette)
 
-        self.bmi = QLineEdit(self)
-        self.bmi.setText("")
-
-        self.bsa = QLineEdit(self)
-        self.bsa.setText("")
-        self.bsa.move(50,50)
-
-        self.show()
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    main = adult()
+    main = Main()
     sys.exit(app.exec_())
