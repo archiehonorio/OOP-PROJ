@@ -4,6 +4,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from old import *
+import math
 
 
 class Intro(QMainWindow):
@@ -163,25 +164,23 @@ class Main(QMainWindow):
         self.button.setGeometry(375,580,250,30)
         self.button.clicked.connect(self.info)
         self.show()
+
     def info(self):
         name = str(self.textbox1.text())
         age = int(self.textbox2.text())
-        height = int(self.textbox3.text())
-        weight = int(self.textbox4.text())
+        height = float(self.textbox3.text())
+        weight = float(self.textbox4.text())
         sex = str(self.textbox5.text())
         ageGap = 13
         ageGap1 = 59
         ageGap2 = 60
         ageGap3 = 12
-        BMI = weight/((height)**2)
         BSA = 0.20247*(height**0.725)*(weight**0.425)
-        self.compute =compute1()
-        self.compute.bmi(BMI)
-        self.compute.bsa(BSA)
+        BMI = (weight/((height)**2))*100
         self.data(name,age,height,weight,sex,ageGap,ageGap1,ageGap2,ageGap3,BMI,BSA)
+
     def data(self,name,age,height,weight,sex,ageGap,ageGap1,ageGap2,ageGap3,BMI,BSA):
         proceed = QMessageBox.question(self, "Submitting Data", "Confirm?", QMessageBox.Yes | QMessageBox.No, QMessageBox.Yes)
-
         if proceed == QMessageBox.Yes and name != "" and age != "" and height != "" and weight != "" and sex != "":
             dictionarydb = SqliteDict("AgeStruc.db", autocommit= True)
             ageDiff = dictionarydb.get('Age',[])
@@ -204,6 +203,10 @@ class Main(QMainWindow):
             pass
         elif proceed == QMessageBox.No and name != "" or age != "" or height != "" or weight != "" or sex != "":
             QMessageBox.warning(self, "Error","Please complete the blanked field", QMessageBox.Ok, QMessageBox.Ok)
+        self.compute =compute1()
+        self.compute.calculation(BMI)
+        self.compute.calculation1(BSA) 
+        self.compute.hide()
 class compute1(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -215,23 +218,29 @@ class compute1(QMainWindow):
         palette = QPalette()
         palette.setBrush(QPalette.Window, QBrush(photo1))
         self.setPalette(palette)
-    def bmi(self,BMI):
+
         self.background = QLabel(self)
         self.background.setPixmap(QPixmap('bmi.png'))
         self.background.setGeometry(570,200,200,200)
-        self.bmi = QLineEdit(self)
-        self.bmi.setText(f"{BMI}")
-        self.bmi.setGeometry(620,320,100,20)
-        self.bmi.setAlignment(Qt.AlignCenter)
 
-    def bsa(self,BSA):
         self.background = QLabel(self)
         self.background.setPixmap(QPixmap('bsa.png'))
         self.background.setGeometry(570,300,200,200)
+    def calculation(self,BMI):
+
+        self.bmi = QLineEdit(self)
+        self.bmi.setText(f"{BMI}")
+        self.bmi.setGeometry(620,320,100,20)
+        self.bmi.setStyleSheet("background-color:lightgreen;")
+        self.bmi.setAlignment(Qt.AlignCenter)
+    def calculation1(self,BSA):
+
         self.bsa = QLineEdit(self)
-        self.bsa.setText(f"{BSA}")
+        self.bsa.setText(f"{BSA}" )
         self.bsa.setGeometry(620,420,100,20)
         self.bsa.setAlignment(Qt.AlignCenter)
+        self.bsa.setStyleSheet("background-color:lightgreen;")
+
         self.show()   
 
 class adult(QMainWindow):
@@ -265,7 +274,9 @@ class adult(QMainWindow):
         self.button2 =  QPushButton("Compute BMI:",self)
         self.button2.setStyleSheet("""QPushButton{border: 2px groove white; border-radius: 10px; text-align: center; font-size: 12px; background-color: #0457bf; color:white;} QPushButton:hover {border: 2px groove white; border-radius: 10px; text-align: center; font-size: 14px; background-color: #000080; color:white; transform: }""")
         self.button2.setGeometry(375,650,250,40)
-        self.button2.clicked.connect(self.compute1)
+        self.compute1 = compute1()
+        self.button2.clicked.connect(self.compute1.calculation)
+        self.button2.clicked.connect(self.compute1.calculation1)
         #$self.button2.clicked.connect()
         self.button3 =  QPushButton("Health Care Tips",self)
         self.button3.setStyleSheet("""QPushButton{border: 2px groove white; border-radius: 10px; text-align: center; font-size: 12px; background-color: #0457bf; color:white;} QPushButton:hover {border: 2px groove white; border-radius: 10px; text-align: center; font-size: 14px; background-color: #000080; color:white; transform: }""")
@@ -288,9 +299,7 @@ class adult(QMainWindow):
     def health(self):
         self.health = health()
         self.health.show()
-    def compute1(self):
-        self.compute1 = compute1()
-        self.compute1.show()
+
 class OrganSystems(QMainWindow):
     def __init__(self):
         super().__init__()
