@@ -257,51 +257,47 @@ class adult(QMainWindow):
         self.initUI()
 
     def initUI(self):
+
         self.setWindowTitle(self.title)
         self.setGeometry(self.x,self.y,self.width,self.height)
         self.setWindowIcon(QIcon('logo1.png'))
         #DITO YUNG BACKGROUND
-        photo = QImage('3d-empty-studio-room-show-booth-for-designers-with-spotlight-on-black-gradient-background-vector.jpg')
+        photo = QImage('pngtree-early-morning-office-background-design-backgroundillustration-backgroundoffice-backgroundadvertising-image_64568.jpg')
         photo1 = photo.scaled(QSize(1000,750))
         palette = QPalette()
         palette.setBrush(QPalette.Window, QBrush(photo1))
         self.setPalette(palette)
-        self.doctor = QLabel(self)
-        self.doctor.setPixmap(QPixmap('adult.png'))
-        self.doctor.setGeometry(300,150,400,500)
 
         self.button =  QPushButton("Organ Systems",self)
         self.button.setStyleSheet("""QPushButton{border: 3px groove white; border-radius: 30px; text-align: center; font-size: 30px; background-color: #0457bf; color:white;} QPushButton:hover {border: 2px groove white; border-radius: 20px; text-align: center; font-size: 35px; background-color: #000080; color:white; transform: }""")
-        self.button.setGeometry(325,100,350,70)
-        self.button.clicked.connect(self.organs)
-        self.button2 =  QPushButton("Compute BMI:",self)
-        self.button2.setStyleSheet("""QPushButton{border: 2px groove white; border-radius: 10px; text-align: center; font-size: 12px; background-color: #0457bf; color:white;} QPushButton:hover {border: 2px groove white; border-radius: 10px; text-align: center; font-size: 14px; background-color: #000080; color:white; transform: }""")
-        self.button2.setGeometry(375,650,250,40)
-        self.compute1 = compute1()
-        self.button2.clicked.connect(self.compute1.calculation)
-        self.button2.clicked.connect(self.compute1.calculation1)
-        #$self.button2.clicked.connect()
+        self.button.setGeometry(400,200,350,70)
+        self.button.clicked.connect(self.organics)
+        self.button2 =  QPushButton("Compute BMI",self)
+        self.button2.setStyleSheet("""QPushButton{border: 3px groove white; border-radius: 30px; text-align: center; font-size: 30px; background-color: #0457bf; color:white;} QPushButton:hover {border: 2px groove white; border-radius: 20px; text-align: center; font-size: 35px; background-color: #000080; color:white; transform: }""")
+        self.button2.setGeometry(400,300,350,70)
+        self.button2.clicked.connect(self.bmiz)
         self.button3 =  QPushButton("Health Care Tips",self)
-        self.button3.setStyleSheet("""QPushButton{border: 2px groove white; border-radius: 10px; text-align: center; font-size: 12px; background-color: #0457bf; color:white;} QPushButton:hover {border: 2px groove white; border-radius: 10px; text-align: center; font-size: 14px; background-color: #000080; color:white; transform: }""")
-        self.button3.setGeometry(150,380,250,40)
-        self.button3.clicked.connect(self.health)
-        #self.button3.clicked.connect(s)
+        self.button3.setStyleSheet("""QPushButton{border: 3px groove white; border-radius: 30px; text-align: center; font-size: 30px; background-color: #0457bf; color:white;} QPushButton:hover {border: 2px groove white; border-radius: 20px; text-align: center; font-size: 35px; background-color: #000080; color:white; transform: }""")
+        self.button3.setGeometry(400,400,350,70)
+        self.button3.clicked.connect(self.healthy)
         self.button4 =  QPushButton("Workout Ideas",self)
-        self.button4.setStyleSheet("""QPushButton{border: 2px groove white; border-radius: 10px; text-align: center; font-size: 12px; background-color: #0457bf; color:white;} QPushButton:hover {border: 2px groove white; border-radius: 10px; text-align: center; font-size: 14px; background-color: #000080; color:white; transform: }""")
-        self.button4.setGeometry(600,380,250,40)
+        self.button4.setStyleSheet("""QPushButton{border: 3px groove white; border-radius: 30px; text-align: center; font-size: 30px; background-color: #0457bf; color:white;} QPushButton:hover {border: 2px groove white; border-radius: 20px; text-align: center; font-size: 35px; background-color: #000080; color:white; transform: }""")
+        self.button4.setGeometry(400,500,350,70)
         self.button4.clicked.connect(self.workout)
-        #self.button4.clicked.connect(self.data)
-        self.show()
-    def workout(self):
-        self.workout = workout()
-        self.workout.show()
-    def organs(self):
-        self.organ = OrganSystems()
-        self.organ.show()
-
-    def health(self):
         self.health = health()
         self.health.show()
+    def organics(self):
+        self.organs = OrganSystems()
+        self.organs.show()
+    def workout(self):
+        self.a = workout()
+        self.a.show()
+    def healthy(self):
+        self.b = health()
+        self.b.show()
+    def bmiz(self):
+        self.c = compute1()
+        self.c.show()
 
 class OrganSystems(QMainWindow):
     def __init__(self):
@@ -613,7 +609,7 @@ class health(QMainWindow):
 class baby(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.title = "Human Body Baby to 12 years old Analysis"
+        self.title = "Human Body Teenager-Child Analysis"
         self.x=350
         self.y=100
         self.width=1000
@@ -621,40 +617,33 @@ class baby(QMainWindow):
         self.initUI()
 
     def initUI(self):
+
         self.setWindowTitle(self.title)
         self.setGeometry(self.x,self.y,self.width,self.height)
         self.setWindowIcon(QIcon('logo1.png'))
         #DITO YUNG BACKGROUND
-        photo = QImage('3d-empty-studio-room-show-booth-for-designers-with-spotlight-on-black-gradient-background-vector.jpg')
+        photo = QImage('backtoschool-.jpg')
         photo1 = photo.scaled(QSize(1000,750))
         palette = QPalette()
         palette.setBrush(QPalette.Window, QBrush(photo1))
         self.setPalette(palette)
-        self.doctor = QLabel(self)
-        self.doctor.setPixmap(QPixmap('adult.png'))
-        self.doctor.setGeometry(300,150,400,500)
 
         self.button =  QPushButton("Organ Systems",self)
         self.button.setStyleSheet("""QPushButton{border: 3px groove white; border-radius: 30px; text-align: center; font-size: 30px; background-color: #0457bf; color:white;} QPushButton:hover {border: 2px groove white; border-radius: 20px; text-align: center; font-size: 35px; background-color: #000080; color:white; transform: }""")
-        self.button.setGeometry(325,100,350,70)
+        self.button.setGeometry(150,200,350,70)
         self.button.clicked.connect(self.organs)
-        self.button2 =  QPushButton("Compute BMI:",self)
-        self.button2.setStyleSheet("""QPushButton{border: 2px groove white; border-radius: 10px; text-align: center; font-size: 12px; background-color: #0457bf; color:white;} QPushButton:hover {border: 2px groove white; border-radius: 10px; text-align: center; font-size: 14px; background-color: #000080; color:white; transform: }""")
-        self.button2.setGeometry(375,650,250,40)
-        self.compute1 = computeb()
-        self.button2.clicked.connect(self.compute1.calculation)
-        self.button2.clicked.connect(self.compute1.calculation1)
-        #$self.button2.clicked.connect()
+        self.button2 =  QPushButton("Compute BMI",self)
+        self.button2.setStyleSheet("""QPushButton{border: 3px groove white; border-radius: 30px; text-align: center; font-size: 30px; background-color: #0457bf; color:white;} QPushButton:hover {border: 2px groove white; border-radius: 20px; text-align: center; font-size: 35px; background-color: #000080; color:white; transform: }""")
+        self.button2.setGeometry(150,300,350,70)
+        self.button2.clicked.connect(self.computeb)
         self.button3 =  QPushButton("Health Care Tips",self)
-        self.button3.setStyleSheet("""QPushButton{border: 2px groove white; border-radius: 10px; text-align: center; font-size: 12px; background-color: #0457bf; color:white;} QPushButton:hover {border: 2px groove white; border-radius: 10px; text-align: center; font-size: 14px; background-color: #000080; color:white; transform: }""")
-        self.button3.setGeometry(150,380,250,40)
+        self.button3.setStyleSheet("""QPushButton{border: 3px groove white; border-radius: 30px; text-align: center; font-size: 30px; background-color: #0457bf; color:white;} QPushButton:hover {border: 2px groove white; border-radius: 20px; text-align: center; font-size: 35px; background-color: #000080; color:white; transform: }""")
+        self.button3.setGeometry(150,400,350,70)
         self.button3.clicked.connect(self.health)
-        #self.button3.clicked.connect(s)
         self.button4 =  QPushButton("Workout Ideas",self)
-        self.button4.setStyleSheet("""QPushButton{border: 2px groove white; border-radius: 10px; text-align: center; font-size: 12px; background-color: #0457bf; color:white;} QPushButton:hover {border: 2px groove white; border-radius: 10px; text-align: center; font-size: 14px; background-color: #000080; color:white; transform: }""")
-        self.button4.setGeometry(600,380,250,40)
+        self.button4.setStyleSheet("""QPushButton{border: 3px groove white; border-radius: 30px; text-align: center; font-size: 30px; background-color: #0457bf; color:white;} QPushButton:hover {border: 2px groove white; border-radius: 20px; text-align: center; font-size: 35px; background-color: #000080; color:white; transform: }""")
+        self.button4.setGeometry(150,500,350,70)
         self.button4.clicked.connect(self.workout)
-        #self.button4.clicked.connect(self.data)
         self.show()
     def workout(self):
         self.workout = workoutb()
@@ -662,6 +651,10 @@ class baby(QMainWindow):
     def organs(self):
         self.organ = OrganB()
         self.organ.show()
+    
+    def computeb(self):
+        self.bmz = computeb()
+        self.bmz.show()
 
     def health(self):
         self.health = htipsb()
@@ -1021,7 +1014,7 @@ class htipsb(QMainWindow):
 class matanda(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.title = "Old Age Human Body Analysis"
+        self.title = "Human Body Teenager-Senior Analysis"
         self.x=350
         self.y=100
         self.width=1000
@@ -1034,55 +1027,32 @@ class matanda(QMainWindow):
         self.setGeometry(self.x,self.y,self.width,self.height)
         self.setWindowIcon(QIcon('logo1.png'))
         #DITO YUNG BACKGROUND
-        photo = QImage('3d-empty-studio-room-show-booth-for-designers-with-spotlight-on-black-gradient-background-vector.jpg')
+        photo = QImage('pngtree-fresh-office-background-illustration-design-paintedcartoonfresh-backgroundoffice-backgroundillustration-image_64563.jpg')
         photo1 = photo.scaled(QSize(1000,750))
         palette = QPalette()
         palette.setBrush(QPalette.Window, QBrush(photo1))
         self.setPalette(palette)
-        self.doctor = QLabel(self)
-        self.doctor.setPixmap(QPixmap('matanda.jpg'))
-        self.doctor.setGeometry(300,150,400,500)
-        """
-        self.text = QLineEdit(self)
-        self.text.setGeometry(195,150,60,30)
-        self.text.setAlignment(Qt.AlignCenter)
-        self.textL = QLabel("Age",self)
-        self.textL.setStyleSheet("color: white; font-weight: bold;")
-        self.textL.move(210,120)
 
-        self.text1 = QLineEdit(self)
-        self.text1.setGeometry(300,450,60,30)
-        self.text1.setAlignment(Qt.AlignCenter)
-        self.textL1 = QLabel("Height",self)
-        self.textL1.setStyleSheet("color: white; font-weight: bold;")
-        self.textL1.move(310,420)
-
-        self.text2 = QLineEdit(self)
-        self.text2.setGeometry(195,680,60,30)
-        self.text2.setAlignment(Qt.AlignCenter)
-        self.textL2 = QLabel("Weight",self)
-        self.textL2.setStyleSheet("color: white; font-weight: bold;")
-        self.textL2.move(205,650)
-        """
+        
         self.button =  QPushButton("Organ Systems",self)
         self.button.setStyleSheet("""QPushButton{border: 3px groove white; border-radius: 30px; text-align: center; font-size: 30px; background-color: #0457bf; color:white;} QPushButton:hover {border: 2px groove white; border-radius: 20px; text-align: center; font-size: 35px; background-color: #000080; color:white; transform: }""")
-        self.button.setGeometry(325,100,350,70)
+        self.button.setGeometry(100,200,350,70)
         self.button.clicked.connect(self.organs)
-        self.button2 =  QPushButton("Compute BMI:",self)
-        self.button2.setStyleSheet("""QPushButton{border: 2px groove white; border-radius: 10px; text-align: center; font-size: 12px; background-color: #0457bf; color:white;} QPushButton:hover {border: 2px groove white; border-radius: 10px; text-align: center; font-size: 14px; background-color: #000080; color:white; transform: }""")
-        self.button2.setGeometry(375,650,250,40)
+        self.button2 =  QPushButton("Compute BMI",self)
+        self.button2.setStyleSheet("""QPushButton{border: 3px groove white; border-radius: 30px; text-align: center; font-size: 30px; background-color: #0457bf; color:white;} QPushButton:hover {border: 2px groove white; border-radius: 20px; text-align: center; font-size: 35px; background-color: #000080; color:white; transform: }""")
+        self.button2.setGeometry(100,300,350,70)
         self.button2.clicked.connect(self.com_choice)
         self.button3 =  QPushButton("Health Care Tips",self)
-        self.button3.setStyleSheet("""QPushButton{border: 2px groove white; border-radius: 10px; text-align: center; font-size: 12px; background-color: #0457bf; color:white;} QPushButton:hover {border: 2px groove white; border-radius: 10px; text-align: center; font-size: 14px; background-color: #000080; color:white; transform: }""")
-        self.button3.setGeometry(150,380,250,40)
+        self.button3.setStyleSheet("""QPushButton{border: 3px groove white; border-radius: 30px; text-align: center; font-size: 30px; background-color: #0457bf; color:white;} QPushButton:hover {border: 2px groove white; border-radius: 20px; text-align: center; font-size: 35px; background-color: #000080; color:white; transform: }""")
+        self.button3.setGeometry(100,400,350,70)
         self.button3.clicked.connect(self.H_tips)
         self.button4 =  QPushButton("Workout Ideas",self)
-        self.button4.setStyleSheet("border: 2px groove white; border-radius: 5px; text-align: center; background-color: white;")
-        self.button4.setGeometry(600,380,250,30)
+        self.button4.setStyleSheet("""QPushButton{border: 3px groove white; border-radius: 30px; text-align: center; font-size: 30px; background-color: #0457bf; color:white;} QPushButton:hover {border: 2px groove white; border-radius: 20px; text-align: center; font-size: 35px; background-color: #000080; color:white; transform: }""")
+        self.button4.setGeometry(100,500,350,70)
         self.button4.clicked.connect(self.workout)
         
         self.show()
-        
+       
     def workout(self):
         self.open = Workout_console()
         self.open.show()
